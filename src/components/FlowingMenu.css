@@ -51,10 +51,28 @@
   }
   
   .menu__content {
-    background-color: #fff;
-    color: #000;
+    background-color: #000;
+    color: #fff;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    padding: 0;
+  }
+  
+  .menu__content.expanded {
+    max-height: 1000px; /* Adjust this value based on your content */
+    opacity: 1;
     padding: 2rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu__content h2 {
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  .menu__content p, .menu__content li {
+    color: rgba(255, 255, 255, 0.8);
   }
   
   /* When menu item is active, keep the white background */

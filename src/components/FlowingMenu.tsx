@@ -13,9 +13,21 @@ interface FlowingMenuProps {
 
 const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
 
   const handleItemClick = (index: number) => {
-    setActiveItem(activeItem === index ? null : index);
+    if (activeItem === index) {
+      // If clicking the same item, start collapse animation
+      setActiveItem(null);
+      // Wait for collapse animation to finish before removing content
+      setTimeout(() => {
+        setExpandedItem(null);
+      }, 500); // Match this with the CSS transition duration
+    } else {
+      // If clicking a different item, immediately show new content
+      setActiveItem(index);
+      setExpandedItem(index);
+    }
   };
 
   return (
@@ -35,8 +47,8 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
                 {item.text}
               </a>
             </div>
-            {activeItem === idx && (
-              <div className="menu__content">
+            {expandedItem === idx && (
+              <div className={`menu__content ${activeItem === idx ? 'expanded' : ''}`}>
                 {item.content}
               </div>
             )}
