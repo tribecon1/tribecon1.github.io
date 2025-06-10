@@ -93,7 +93,7 @@ function App() {
             <h1 className="greeting">Hey!</h1>
             <h1 className="name">I'm Bentley Bigelow</h1>
             <p className="description">
-              I am a studying fullstack software developer! Scroll below to take a look at my personal projects, skills, and educational and professional experience!
+              I am a studying fullstack software developer! Scroll below to take a look at my personal projects, skills, and contact information!
             </p>
           </AnimatedContent>
         </div>
