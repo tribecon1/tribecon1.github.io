@@ -1,6 +1,45 @@
 import './ContentSections.css';
+import { useState } from 'react';
+
+type Project = {
+  title: string;
+  description: string[];
+};
+
+type Projects = {
+  [key: string]: Project;
+};
 
 const ContentSections = () => {
+  const [activeProject, setActiveProject] = useState<string>('dice');
+
+  const projects: Projects = {
+    dice: {
+      title: 'Custom Dice Designer',
+      description: [
+        'Connected a custom Shopify Liquid frontend to AWS API Gateways and Lambda functions',
+        'Created and stored authenticated sessions in DynamoDB',
+        'Developed a static Typescript React site using Three.js library for 3D dice rendering and customization',
+        'Implemented S3 and DynamoDB storage for saving designs',
+        'Integrated with Shopify site for display'
+      ]
+    },
+    dnc: {
+      title: 'DNC Emailer, DOT Verifier & Retriever',
+      description: [
+        'Developed web-scraping programs that utilize Selenium and Playwright to automate the email process for companies in the DNC registry',
+        'Created adjacent process of retrieving data from the CHP database and verifying for quotability with Geico\'s interface'
+      ]
+    },
+    newtripideas: {
+      title: 'NewTripIdeas',
+      description: [
+        'Collaborated on a web application that leveraged AI to create travel plans based on the user\'s chosen location, interests, and budget',
+        'Implemented a Next.js framework to allow for greater search engine optimization for the website using static site generation for blog pages'
+      ]
+    }
+  };
+
   return (
     <div className="content-sections">
       <section id="projects" className="content-section">
@@ -8,30 +47,27 @@ const ContentSections = () => {
           <h2>Projects</h2>
         </div>
         <div className="section-content">
-          <div className="project-list">
-            <div className="project-item">
-              <h3>NewTripIdeas</h3>
-              <ul>
-                <li>Collaborated on a web application that leveraged AI to create travel plans based on the user's chosen location, interests, and budget</li>
-                <li>Implemented a Next.js framework to allow for greater search engine optimization for the website using static site generation for blog pages</li>
-              </ul>
+          <div className="project-tabs">
+            <div className="tab-buttons">
+              {Object.entries(projects).map(([key, project]) => (
+                <button
+                  key={key}
+                  className={`tab-button ${activeProject === key ? 'active' : ''}`}
+                  onClick={() => setActiveProject(key)}
+                >
+                  {project.title}
+                </button>
+              ))}
             </div>
-            <div className="project-item">
-              <h3>DNC Emailer, DOT Verifier & Retriever</h3>
-              <ul>
-                <li>Developed web-scraping programs that utilize Selenium and Playwright to automate the email process for companies in the DNC registry</li>
-                <li>Created adjacent process of retrieving data from the CHP database and verifying for quotability with Geico's interface</li>
-              </ul>
-            </div>
-            <div className="project-item">
-              <h3>Custom Dice Designer</h3>
-              <ul>
-                <li>Connected a custom Shopify Liquid frontend to AWS API Gateways and Lambda functions</li>
-                <li>Created and stored authenticated sessions in DynamoDB</li>
-                <li>Developed a static Typescript React site using Three.js library for 3D dice rendering and customization</li>
-                <li>Implemented S3 and DynamoDB storage for saving designs</li>
-                <li>Integrated with Shopify site for display</li>
-              </ul>
+            <div className="tab-content">
+              <div className="project-item">
+                <h3>{projects[activeProject].title}</h3>
+                <ul>
+                  {projects[activeProject].description.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

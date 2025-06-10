@@ -35,52 +35,76 @@
   border-radius: 0;
 }
 
-.project-list {
+.project-tabs {
+  width: 100%;
+}
+
+.tab-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab-button:hover {
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.tab-button.active {
+  color: #000;
+  background-color: #fff;
+  border-bottom: 2px solid #90b7e1;
+  margin-bottom: -2px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+  padding: 1rem 0;
 }
 
 .project-item {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.project-item:last-child {
-  border-bottom: none;
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 2rem;
 }
 
 .project-item h3 {
-  color: #fff;
-  margin-bottom: 15px;
-  font-style: italic;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 .project-item ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  list-style-type: disc;
+  padding-left: 1.5rem;
 }
 
 .project-item li {
-  margin-bottom: 10px;
-  padding-left: 20px;
-  position: relative;
-  color: #fff;
-}
-
-.project-item li:before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #fff;
+  margin-bottom: 0.5rem;
+  color: #555;
+  line-height: 1.5;
 }
 
 .skills-categories {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 0 40px;
   border-bottom: none;
 }
@@ -90,10 +114,6 @@
   background: #18191a;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-}
-
-.skill-category:last-child {
-  border-bottom: none;
 }
 
 .skill-category h3 {
@@ -123,8 +143,8 @@
 }
 
 .logos {
-  margin-bottom: 20px;
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
   border-bottom: none;
 }
 

@@ -54,7 +54,16 @@ function App() {
         <div className="about-section">
           <h2>About Me</h2>
           <div className="about-content">
-            <p>This section will be filled in later with personal information and background.</p>
+            <div className="about-text">
+              <p>I was born and raised in Southern California, never too far from the beach, which engendered a love for volleyball, longboarding, and running. I have also been able to travel the world, serving as a volunteer missionary for my church in Ukraine, Germany, Switzerland, and Austria, helping me develop my skills to speak both Ukrainian and German.</p>
+            </div>
+            <div className="about-images">
+              <img src="/bigelow -137.JPG" alt="Wedding Photo" className="about-image wedding" />
+              <img src="/hiking.png" alt="Hiking Photo" className="about-image hiking" />
+            </div>
+            <div className="about-text">
+              <p>I am happily married as of October 2025, and my wife and I love spending time watching every new movie or show, going on hikes, and being with friends and family!</p>
+            </div>
           </div>
         </div>
         <div className="contact-section">
