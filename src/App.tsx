@@ -1,10 +1,74 @@
 import Aurora from './components/AuroraHeader';
 import AnimatedContent from './components/AnimatedContent';
 import ContentSections from './components/ContentSections';
+import { useState, useEffect } from 'react';
 import './App.css';
 import './IconBanner.css';
 
 function App() {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [isHiding, setIsHiding] = useState(false);
+
+  useEffect(() => {
+    // Show scroll indicator after initial animation (1.2s + 0.3s delay)
+    const timer = setTimeout(() => {
+      setShowScrollIndicator(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0 && !isHiding) {
+        setIsHiding(true);
+        setTimeout(() => {
+          setShowScrollIndicator(false);
+          setIsHiding(false);
+        }, 500);
+      } else if (window.scrollY === 0 && !showScrollIndicator) {
+        setShowScrollIndicator(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showScrollIndicator, isHiding]);
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      const headerOffset = 100;
+      const elementPosition = projectsSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const startPosition = window.pageYOffset;
+      const distance = offsetPosition - startPosition;
+      const duration = 2000; // 2 seconds
+      let start: number | null = null;
+
+      const animation = (currentTime: number) => {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Easing function for smooth acceleration and deceleration
+        const easeInOutCubic = (progress: number): number => {
+          return progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        };
+
+        window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      };
+
+      requestAnimationFrame(animation);
+    }
+  };
+
   return (
     <div className="app-container">
       <Aurora
@@ -47,6 +111,13 @@ function App() {
           >
             <img src="/personal_pic.png" alt="Personal" className="personal-image" />
           </AnimatedContent>
+        </div>
+      </div>
+      <div className={`scroll-indicator ${showScrollIndicator ? 'visible' : ''} ${isHiding ? 'hiding' : ''}`}>
+        <p className="scroll-text">Check out my projects and skills!</p>
+        <div className="arrows" onClick={scrollToProjects}>
+          <i className="fas fa-chevron-down"></i>
+          <i className="fas fa-chevron-down"></i>
         </div>
       </div>
       <ContentSections />
