@@ -133,7 +133,7 @@ function App() {
               <img src="/hiking.png" alt="Hiking Photo" className="about-image hiking" />
             </div>
             <div className="about-text">
-              <p>I am happily married as of October 2025, and my wife and I love spending time watching every new movie or show, going on hikes, and being with friends and family!</p>
+              <p>I am happily married as of October 2024, and my wife and I love spending time watching every new movie or show, going on hikes, and being with friends and family!</p>
             </div>
           </div>
         </div>
